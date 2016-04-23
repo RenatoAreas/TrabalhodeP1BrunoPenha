@@ -6,6 +6,7 @@
 package PacotePrincipal;
 
 import Usuarios.TrataLoginDJ;
+import Util.JavaWebExceptionCapture;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -19,8 +20,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Renato
  */
-@WebServlet(name = "TratarLoginServlet", urlPatterns = {"/TratarLoginServlet"})
-public class TratarLoginServletDj extends HttpServlet {
+public class TratarLoginDjSrv extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,14 +31,14 @@ public class TratarLoginServletDj extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
             String usuario = request.getParameter("Login");
             String senha = request.getParameter("senha");
-           Usuario objUsuario = new Usuario();
+            Usuario objUsuario = new Usuario();
 
             objUsuario.setUsuario(usuario);
             objUsuario.setSenha(senha);
@@ -75,9 +75,10 @@ public class TratarLoginServletDj extends HttpServlet {
                 out.println("</body>");
                 out.println("</html>");
             }
-
         } finally {
+            out.println("<h1> Usuario ou senha incorreta </h1>");
             out.close();
+            
         }
     }
 }

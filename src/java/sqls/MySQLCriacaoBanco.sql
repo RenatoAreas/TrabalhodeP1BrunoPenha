@@ -33,9 +33,10 @@ SET character_set_client = utf8;
 CREATE TABLE `clientes` (
   `id` int(11) NOT NULL auto_increment,
   `nome` varchar(20) NOT NULL,
-  `cpf` varchar(20) NOT NULL,
-  `telefone` varchar(20) NOT NULL,
-  `email` varchar(30) default NULL,
+  `Sobrenome` varchar (30) NOT NULL, 
+  `Dtnascimento` varchar (20) NOT NULL,
+  `rg` varchar(20) NOT NULL
+  `cpf` varchar(20) NOT NULL
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
 SET character_set_client = @saved_cs_client;
@@ -54,18 +55,18 @@ UNLOCK TABLES;
 -- Table structure for table `itenspedidos`
 --
 
-DROP TABLE IF EXISTS `itenspedidos`;
+DROP TABLE IF EXISTS `ingresso`;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
 CREATE TABLE `itenspedidos` (
   `id` int(11) NOT NULL auto_increment,
   `quantidade` int(11) NOT NULL,
-  `idProduto` int(11) NOT NULL,
+  `idIngresso` int(11) NOT NULL,
   `idPedido` int(11) NOT NULL,
   PRIMARY KEY  (`id`),
-  KEY `idProduto` (`idProduto`),
+  KEY `idIngresso` (`idIngresso`),
   KEY `idPedido` (`idPedido`),
-  CONSTRAINT `itenspedidos_ibfk_1` FOREIGN KEY (`idProduto`) REFERENCES `produtos` (`id`),
+  CONSTRAINT `itenspedidos_ibfk_1` FOREIGN KEY (`idIngresso`) REFERENCES `ingresso` (`id`),
   CONSTRAINT `itenspedidos_ibfk_2` FOREIGN KEY (`idPedido`) REFERENCES `pedidos` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 SET character_set_client = @saved_cs_client;
